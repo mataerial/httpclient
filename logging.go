@@ -76,6 +76,10 @@ func StartLogging(requestBody, responseBody, timing bool) {
 	http.DefaultTransport = &LoggingTransport{&http.Transport{}, requestBody, responseBody, timing}
 }
 
+func StartLoggingWithTransport(requestBody, responseBody, timing bool, t *http.Transport) {
+	http.DefaultTransport = &LoggingTransport{t, requestBody, responseBody, timing}
+}
+
 // Disable logging requests/responses
 func StopLogging() {
 	http.DefaultTransport = &http.Transport{}
